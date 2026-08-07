@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  quizAttempts  QuizAttempt[]
+  bookmarks     Bookmark[]
+  chatSessions  ChatSession[]
+}
+
+model QuizAttempt {
+  id         String   @id @default(cuid())
+  userId     String
+  questionId String
+  topicSlug  String
+  isCorrect  Boolean
+  createdAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Bookmark {
+  id          String   @id @default(cuid())
+  userId      String
+  contentType String // 'topic' | 'formula'
+  contentSlug String
+  createdAt   DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, contentType, contentSlug])
+}
+
+model ChatSession {
+  id          String   @id @default(cuid())
+  userId      String?
+  title       String?
+  contextSlug String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user     User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  messages ChatMessage[]
+}
+
+model ChatMessage {
+  id        String   @id @default(cuid())
+  sessionId String
+  role      String // 'user' | 'assistant'
+  content   String
+  createdAt DateTime @default(now())
+
+  session ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+}
