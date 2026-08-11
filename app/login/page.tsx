@@ -1,12 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const from = searchParams.get("from") || "/profile";
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -25,7 +27,7 @@ export default function LoginPage() {
 
     setLoading(false);
     if (res.ok) {
-      router.push("/profile");
+      router.push(from);
       router.refresh();
     } else {
       const data = await res.json();
