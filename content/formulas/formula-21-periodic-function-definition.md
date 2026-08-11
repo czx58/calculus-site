@@ -1,9 +1,47 @@
 ---
-title: "周期函数定义"
-slug: "periodic-function-definition"
-category: "函数"
-latex: 'f(x + T) = f(x) \quad (T > 0)'
-plaintext: 'f(x+T) = f(x) (T>0)'
+title: 周期函数定义
+slug: periodic-function-definition
+category: 函数
+latex: f(x + T) = f(x) \quad (T > 0)
+plaintext: f(x+T) = f(x) (T>0)
 relatedTopicSlugs:
   - functions-basics
+usage: >-
+  周期函数定义用于描述函数值在自变量增加固定正数 $T$ 后重复出现的性质。若存在正数 $T$，使得对于定义域内任意 $x$，都有
+  $f(x+T)=f(x)$，则称 $f(x)$ 为周期函数，$T$ 为它的一个周期。
+
+
+  - **使用场景**：判断函数是否为周期函数、求最小正周期、分析三角函数（如 $\sin x$、$\cos
+  x$）的周期性、在信号处理和振动问题中简化函数研究。
+
+  - **注意事项**：
+    - 周期 $T$ 必须是正数，且通常取定义域内的所有 $x$ 都成立。
+    - 若 $T$ 是周期，则 $nT$（$n$ 为正整数）也是周期，但最小正周期才是基本周期。
+    - 常数函数（如 $f(x)=1$）是周期函数，但不存在最小正周期。
+    - 定义域可能影响周期性，例如 $f(x)=\sin x$ 在实数域上周期为 $2\pi$，但若定义域受限，则需重新检查。
+  - **常见变形**：
+    - 若 $f(x+T)=f(x)$，则 $f(x)$ 关于 $T$ 平移不变。
+    - 可将定义写为 $f(x)=f(x-T)$（等价形式）。
+    - 对于复合函数，如 $g(x)=f(ax+b)$，若 $f$ 的周期为 $T$，则 $g$ 的周期为 $T/|a|$。
+examples:
+  - problem: 判断函数 $f(x) = \sin x + \cos x$ 是否为周期函数，若是，求出它的最小正周期。
+    solution: >-
+      **解**：
+
+      1. 利用辅助角公式，将 $f(x)$ 化为单一三角函数：
+         $$\sin x + \cos x = \sqrt{2}\sin\left(x + \frac{\pi}{4}\right)$$
+      2. 因为 $\sin$ 函数的周期为 $2\pi$，所以 $\sqrt{2}\sin\left(x + \frac{\pi}{4}\right)$
+      的周期为 $2\pi$（相位平移不改变周期）。
+
+      3. 验证定义：对任意 $x$，有
+         $$f(x+2\pi) = \sqrt{2}\sin\left(x + 2\pi + \frac{\pi}{4}\right) = \sqrt{2}\sin\left(x + \frac{\pi}{4}\right) = f(x)$$
+      4. 因此 $f(x)$ 是周期函数，最小正周期为 $2\pi$。
+  - problem: 设 $f(x)$ 是定义在实数集上的周期函数，周期为 $3$，且 $f(1)=2$。求 $f(7)$ 的值。
+    solution: |-
+      **解**：
+      1. 由周期定义，对任意整数 $k$，有 $f(x+3k)=f(x)$。
+      2. 将 $7$ 表示为 $1$ 加上 $3$ 的倍数：$7 = 1 + 6 = 1 + 3 \times 2$。
+      3. 因此 $f(7) = f(1 + 3 \times 2) = f(1)$。
+      4. 已知 $f(1)=2$，所以 $f(7)=2$。
 ---
+

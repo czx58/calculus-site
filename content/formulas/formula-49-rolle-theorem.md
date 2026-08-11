@@ -1,9 +1,48 @@
 ---
-title: "罗尔定理"
-slug: "rolle-theorem"
-category: "中值定理"
-latex: 'f \in C[a,b], \ f \in D(a,b), \ f(a)=f(b) \Rightarrow \exists \xi \in (a,b), \ f''(\xi)=0'
-plaintext: 'If f continuous on [a,b], differentiable on (a,b), f(a)=f(b), then exists c in (a,b) with f''(c)=0'
+title: 罗尔定理
+slug: rolle-theorem
+category: 中值定理
+latex: >-
+  f \in C[a,b], \ f \in D(a,b), \ f(a)=f(b) \Rightarrow \exists \xi \in (a,b), \
+  f'(\xi)=0
+plaintext: >-
+  If f continuous on [a,b], differentiable on (a,b), f(a)=f(b), then exists c in
+  (a,b) with f'(c)=0
 relatedTopicSlugs:
   - monotonicity-extrema
+usage: >-
+  罗尔定理是微分中值定理的基础，常用于证明函数在某点导数为零或存在零点。**使用场景**：当题目给出函数在闭区间连续、开区间可导且端点函数值相等时，可考虑使用罗尔定理。**注意事项**：需验证三个条件缺一不可；若函数不满足条件，可尝试构造辅助函数。**常见变形**：
+
+  - 若 $f(a)=f(b)$，则存在 $\xi$ 使 $f'(\xi)=0$；
+
+  - 若需证明 $f'(\xi)=k$，可令 $g(x)=f(x)-kx$，则 $g(a)=g(b)$ 时适用；
+
+  - 若证明 $f^{(n)}(\xi)=0$，可反复应用罗尔定理。
+examples:
+  - problem: '设 $f(x)=(x-1)(x-2)(x-3)$，证明存在 $\xi \in (1,3)$ 使得 $f''''(\xi)=0$。'
+    solution: >-
+      **解**：
+
+      1. 因为 $f(x)$ 是多项式，在 $[1,3]$ 上连续，在 $(1,3)$ 内可导。
+
+      2. 观察 $f(1)=f(2)=f(3)=0$。
+
+      3. 在区间 $[1,2]$ 上应用罗尔定理，存在 $\xi_1 \in (1,2)$ 使得 $f'(\xi_1)=0$。
+
+      4. 在区间 $[2,3]$ 上应用罗尔定理，存在 $\xi_2 \in (2,3)$ 使得 $f'(\xi_2)=0$。
+
+      5. 现在 $f'(x)$ 在 $[\xi_1,\xi_2]$ 上连续，在 $(\xi_1,\xi_2)$ 内可导，且
+      $f'(\xi_1)=f'(\xi_2)=0$，再次应用罗尔定理，存在 $\xi \in (\xi_1,\xi_2) \subset (1,3)$
+      使得 $f''(\xi)=0$。
+  - problem: >-
+      设 $f(x)$ 在 $[0,1]$ 上连续，在 $(0,1)$ 内可导，且 $f(0)=0$，$f(1)=1$。证明：存在 $\xi \in
+      (0,1)$ 使得 $f'(\xi)=2\xi$。
+    solution: |-
+      **解**：
+      1. 构造辅助函数 $g(x)=f(x)-x^2$。
+      2. 则 $g(x)$ 在 $[0,1]$ 上连续，在 $(0,1)$ 内可导。
+      3. 计算 $g(0)=f(0)-0=0$，$g(1)=f(1)-1=0$，所以 $g(0)=g(1)$。
+      4. 由罗尔定理，存在 $\xi \in (0,1)$ 使得 $g'(\xi)=0$。
+      5. 而 $g'(x)=f'(x)-2x$，故 $f'(\xi)-2\xi=0$，即 $f'(\xi)=2\xi$。
 ---
+

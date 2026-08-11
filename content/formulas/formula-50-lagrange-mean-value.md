@@ -1,9 +1,65 @@
 ---
-title: "拉格朗日中值定理"
-slug: "lagrange-mean-value"
-category: "中值定理"
-latex: 'f \in C[a,b], \ f \in D(a,b) \Rightarrow \exists \xi \in (a,b), \ f''(\xi) = \frac{f(b)-f(a)}{b-a}'
+title: 拉格朗日中值定理
+slug: lagrange-mean-value
+category: 中值定理
+latex: >-
+  f \in C[a,b], \ f \in D(a,b) \Rightarrow \exists \xi \in (a,b), \ f'(\xi) =
+  \frac{f(b)-f(a)}{b-a}
 plaintext: 'Exists c in (a,b): f''(c) = (f(b)-f(a))/(b-a)'
 relatedTopicSlugs:
   - monotonicity-extrema
+usage: |-
+  拉格朗日中值定理是微分学中的核心定理之一，它建立了函数在区间上的平均变化率与区间内某点瞬时变化率之间的联系。
+
+  **使用场景**：
+  - 证明不等式，如证明 $|\sin x - \sin y| \le |x-y|$。
+  - 研究函数的单调性、凹凸性。
+  - 推导泰勒公式、洛必达法则等。
+  - 估计函数值的误差。
+
+  **注意事项**：
+  - 定理要求函数在闭区间 $[a,b]$ 上连续，在开区间 $(a,b)$ 内可导。
+  - 若函数在端点处不连续或内部不可导，则定理可能不成立。
+  - 定理只保证存在至少一个 $\xi$，但不提供具体求法。
+
+  **常见变形**：
+  - 若 $f(a)=f(b)$，则退化为罗尔定理。
+  - 可变形为 $f(b)-f(a)=f'(\xi)(b-a)$，常用于估计函数增量。
+  - 也可写成 $f'(\xi)=\frac{f(b)-f(a)}{b-a}$，即平均变化率等于某点的瞬时变化率。
+examples:
+  - problem: '证明：当 $x>0$ 时，$\frac{x}{1+x} < \ln(1+x) < x$。'
+    solution: |-
+      **证明**：
+
+      1. 先证右边不等式 $\ln(1+x) < x$。
+         - 令 $f(t)=\ln(1+t)$，在区间 $[0,x]$ 上连续，在 $(0,x)$ 内可导。
+         - 由拉格朗日中值定理，存在 $\xi \in (0,x)$，使得
+           $$\frac{f(x)-f(0)}{x-0} = f'(\xi) = \frac{1}{1+\xi}$$
+         - 因为 $\xi>0$，所以 $\frac{1}{1+\xi} < 1$，故
+           $$\frac{\ln(1+x)}{x} < 1 \Rightarrow \ln(1+x) < x$$
+
+      2. 再证左边不等式 $\frac{x}{1+x} < \ln(1+x)$。
+         - 令 $g(t)=\ln(1+t)$，在区间 $[0,x]$ 上连续，在 $(0,x)$ 内可导。
+         - 由拉格朗日中值定理，存在 $\eta \in (0,x)$，使得
+           $$\frac{g(x)-g(0)}{x-0} = g'(\eta) = \frac{1}{1+\eta}$$
+         - 因为 $\eta < x$，所以 $\frac{1}{1+\eta} > \frac{1}{1+x}$，故
+           $$\frac{\ln(1+x)}{x} > \frac{1}{1+x} \Rightarrow \ln(1+x) > \frac{x}{1+x}$$
+
+      3. 综上，原不等式成立。
+  - problem: >-
+      设 $f(x)$ 在 $[0,1]$ 上连续，在 $(0,1)$ 内可导，且 $f(0)=0$，$f(1)=1$。证明：存在 $\xi \in
+      (0,1)$，使得 $f'(\xi)=2\xi$。
+    solution: |-
+      **证明**：
+
+      1. 构造辅助函数 $F(x)=f(x)-x^2$。
+         - 因为 $f(x)$ 在 $[0,1]$ 上连续，在 $(0,1)$ 内可导，所以 $F(x)$ 也在 $[0,1]$ 上连续，在 $(0,1)$ 内可导。
+         - 计算端点值：$F(0)=f(0)-0=0$，$F(1)=f(1)-1=0$。
+
+      2. 由罗尔定理（拉格朗日中值定理的特殊情况），存在 $\xi \in (0,1)$，使得 $F'(\xi)=0$。
+
+      3. 而 $F'(x)=f'(x)-2x$，所以 $f'(\xi)-2\xi=0$，即 $f'(\xi)=2\xi$。
+
+      4. 证毕。
 ---
+

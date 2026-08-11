@@ -1,9 +1,62 @@
 ---
-title: "极限除法法则"
-slug: "limit-quotient-rule"
-category: "极限"
-latex: '\lim_{x \to a} \frac{f(x)}{g(x)} = \frac{\lim_{x \to a} f(x)}{\lim_{x \to a} g(x)} \quad (\lim g(x) \ne 0)'
-plaintext: 'lim(x->a) f(x)/g(x) = lim f(x) / lim g(x) (lim g(x) != 0)'
+title: 极限除法法则
+slug: limit-quotient-rule
+category: 极限
+latex: >-
+  \lim_{x \to a} \frac{f(x)}{g(x)} = \frac{\lim_{x \to a} f(x)}{\lim_{x \to a}
+  g(x)} \quad (\lim g(x) \ne 0)
+plaintext: lim(x->a) f(x)/g(x) = lim f(x) / lim g(x) (lim g(x) != 0)
 relatedTopicSlugs:
   - limit-laws
+usage: >-
+  极限除法法则用于计算两个函数之比的极限，前提是分母的极限存在且不为零。其核心思想是：当 $\lim_{x \to a} g(x) \neq 0$
+  时，可以将商的极限拆分为极限的商。
+
+
+  **使用场景**：
+
+  - 直接代入法求极限时，若分子分母均收敛且分母极限非零，可直接使用该法则。
+
+  - 在计算有理函数、三角函数组合等分式极限时，若分母极限不为零，可简化运算。
+
+
+  **注意事项**：
+
+  - 必须确保 $\lim_{x \to a} g(x) \neq 0$，否则法则不成立（此时需考虑其他方法，如因式分解、有理化或洛必达法则）。
+
+  - 若分子或分母的极限不存在（如无穷大），该法则不能直接应用。
+
+  - 该法则可推广到 $x \to \infty$ 的情形，但同样要求分母极限存在且非零。
+
+
+  **常见变形**：
+
+  - 结合极限的加法、乘法法则，可处理复杂表达式的极限。
+
+  - 若分母极限为零但分子极限也为零（$\frac{0}{0}$型），需先化简（如约去公因子）再应用。
+
+  - 若分母极限为零而分子极限非零，则原极限为无穷大（不存在）。
+examples:
+  - problem: '求极限 $\lim_{x \to 2} \frac{x^2 - 1}{x + 3}$。'
+    solution: |-
+      **解**：
+      1. 直接代入 $x=2$，分子 $2^2-1=3$，分母 $2+3=5$，均有限且分母不为零。
+      2. 由极限除法法则：
+         $$
+         \lim_{x \to 2} \frac{x^2-1}{x+3} = \frac{\lim_{x \to 2}(x^2-1)}{\lim_{x \to 2}(x+3)} = \frac{3}{5}.
+         $$
+      3. 所以极限值为 $\frac{3}{5}$。
+  - problem: '求极限 $\lim_{x \to 1} \frac{x^2 - 1}{x - 1}$。'
+    solution: >-
+      **解**：
+
+      1. 直接代入 $x=1$，分子分母均为0，不能直接使用除法法则（分母极限为0）。
+
+      2. 先因式分解：$x^2-1=(x-1)(x+1)$，原式化为 $\frac{(x-1)(x+1)}{x-1}=x+1$（当 $x \neq
+      1$）。
+
+      3. 化简后，求极限：$\lim_{x \to 1} (x+1) = 2$。
+
+      4. 注意：这里不能直接套用除法法则，但化简后可用代入法，结果为2。
 ---
+
