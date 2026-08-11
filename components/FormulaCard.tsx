@@ -37,14 +37,22 @@ export default function FormulaCard({ formula }: { formula: Formula }) {
         >
           {plain ? "渲染公式" : "纯文本"}
         </button>
-        {formula.relatedTopicSlugs.length > 0 && (
+        <div className="flex items-center gap-3">
           <Link
-            href={`/topics/${formula.relatedTopicSlugs[0]}`}
+            href={`/formulas/${formula.slug}`}
             className="text-xs text-neutral-600 hover:text-neutral-900 underline"
           >
-            相关知识点
+            查看详情
           </Link>
-        )}
+          {formula.relatedTopicSlugs.length > 0 && (
+            <Link
+              href={`/topics/${formula.relatedTopicSlugs[0]}`}
+              className="text-xs text-neutral-600 hover:text-neutral-900 underline"
+            >
+              相关知识点
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );

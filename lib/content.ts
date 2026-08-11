@@ -22,6 +22,11 @@ export type Topic = {
   content: string;
 };
 
+export type FormulaExample = {
+  problem: string;
+  solution: string;
+};
+
 export type Formula = {
   title: string;
   slug: string;
@@ -29,6 +34,8 @@ export type Formula = {
   latex: string;
   plaintext: string;
   relatedTopicSlugs: string[];
+  usage?: string;
+  examples?: FormulaExample[];
 };
 
 export type QuizQuestion = {
@@ -90,6 +97,10 @@ export function getFormulas(): Formula[] {
   return readMatterFiles<Formula>("formulas").sort((a, b) =>
     a.category.localeCompare(b.category)
   );
+}
+
+export function getFormulaBySlug(slug: string): Formula | undefined {
+  return getFormulas().find((f) => f.slug === slug);
 }
 
 export function getFormulasByTopic(topicSlug: string): Formula[] {
