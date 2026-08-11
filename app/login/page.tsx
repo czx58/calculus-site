@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Navbar from "@/components/Navbar";
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const from = searchParams.get("from") || "/profile";
@@ -79,5 +79,13 @@ export default function LoginPage() {
         </form>
       </main>
     </>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="p-8 text-center">加载中…</div>}>
+      <LoginForm />
+    </Suspense>
   );
 }
