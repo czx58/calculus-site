@@ -2,20 +2,25 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Navbar from "@/components/Navbar";
 
 export default function RegisterPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
+  const emailRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+
+    const email = emailRef.current?.value.trim() || "";
+    const name = nameRef.current?.value.trim() || "";
+    const password = passwordRef.current?.value || "";
+
     if (password.length < 6) {
       setError("密码长度至少 6 位");
       return;
@@ -55,29 +60,29 @@ export default function RegisterPage() {
           <div>
             <label className="block text-sm font-medium">邮箱</label>
             <input
+              ref={emailRef}
               type="email"
-              value={email}
+              name="email"
               required
-              onChange={(e) => setEmail(e.target.value)}
               className="mt-1 w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-neutral-400"
             />
           </div>
           <div>
             <label className="block text-sm font-medium">昵称（可选）</label>
             <input
+              ref={nameRef}
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              name="name"
               className="mt-1 w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-neutral-400"
             />
           </div>
           <div>
             <label className="block text-sm font-medium">密码</label>
             <input
+              ref={passwordRef}
               type="password"
-              value={password}
+              name="password"
               required
-              onChange={(e) => setPassword(e.target.value)}
               className="mt-1 w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-neutral-400"
             />
           </div>

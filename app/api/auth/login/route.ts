@@ -24,7 +24,11 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "邮箱或密码错误" }, { status: 401 });
     }
 
-    const session = await getSession();
+    const forwardedProto = req.headers.get("x-forwarded-proto");
+    const isSecure = forwardedProto
+      ? forwardedProto === "https"
+      : req.nextUrl.protocol === "https:";
+    const session = await getSession(isSecure);
     session.user = { id: user.id, email: user.email, name: user.name };
     await session.save();
 

@@ -2,15 +2,15 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useState } from "react";
+import { Suspense, useRef, useState } from "react";
 import Navbar from "@/components/Navbar";
 
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const from = searchParams.get("from") || "/profile";
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -18,6 +18,9 @@ function LoginForm() {
     e.preventDefault();
     setError("");
     setLoading(true);
+
+    const email = emailRef.current?.value.trim() || "";
+    const password = passwordRef.current?.value || "";
 
     const res = await fetch("/api/auth/login", {
       method: "POST",
@@ -53,20 +56,20 @@ function LoginForm() {
           <div>
             <label className="block text-sm font-medium">邮箱</label>
             <input
+              ref={emailRef}
               type="email"
-              value={email}
+              name="email"
               required
-              onChange={(e) => setEmail(e.target.value)}
               className="mt-1 w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-neutral-400"
             />
           </div>
           <div>
             <label className="block text-sm font-medium">密码</label>
             <input
+              ref={passwordRef}
               type="password"
-              value={password}
+              name="password"
               required
-              onChange={(e) => setPassword(e.target.value)}
               className="mt-1 w-full rounded-lg border border-neutral-200 px-3 py-2 text-sm outline-none focus:border-neutral-400"
             />
           </div>

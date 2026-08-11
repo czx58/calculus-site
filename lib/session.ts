@@ -20,7 +20,11 @@ const sessionOptions = {
   },
 };
 
-export async function getSession(): Promise<IronSession<SessionData>> {
+export async function getSession(isSecure?: boolean): Promise<IronSession<SessionData>> {
   const cookieStore = await cookies();
-  return getIronSession<SessionData>(cookieStore, sessionOptions);
+  const options = { ...sessionOptions };
+  if (typeof isSecure === "boolean") {
+    options.cookieOptions = { ...options.cookieOptions, secure: isSecure };
+  }
+  return getIronSession<SessionData>(cookieStore, options);
 }
